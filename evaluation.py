@@ -483,21 +483,21 @@ def evaluate_bag(args):
     os.makedirs(args.out_dir, exist_ok=True)
 
     # --- Generate plots ---
-    # 1) Trajectory vs Plan
+    # 1) Trayectoria vs Plan
     plt.figure()
     if len(aligned_plan_xy):
-        plt.plot(aligned_plan_xy[:,0], aligned_plan_xy[:,1], 'r--', label='Aligned Plan')
-    plt.plot(traj_xy[:,0], traj_xy[:,1], 'b-', label='Trajectory')
-    plt.scatter([goal[0]], [goal[1]], c='g', marker='*', s=120, label='Goal')
+        plt.plot(aligned_plan_xy[:,0], aligned_plan_xy[:,1], 'r--', label='Plan Alineado')
+    plt.plot(traj_xy[:,0], traj_xy[:,1], 'b-', label='Trayectoria')
+    plt.scatter([goal[0]], [goal[1]], c='g', marker='*', s=120, label='Meta')
     plt.axis('equal')
     plt.xlabel('x [m]')
     plt.ylabel('y [m]')
     plt.legend()
-    plt.title('Trajectory vs Plan')
+    plt.title('Trayectoria vs Plan')
     plt.savefig(os.path.join(args.out_dir, 'trayectoria_vs_plan.png'), dpi=180)
     plt.close()
 
-    # 2) Linear and angular velocities
+    # 2) Velocidades lineal y angular
     t_rel_cmd = np.array(t_cmd) - t0
     plt.figure()
     plt.plot(t_rel_cmd, v_cmd, 'g-', label='v [m/s]')
@@ -506,30 +506,30 @@ def evaluate_bag(args):
     for t_ini, t_fin in blocks:
         plt.axvspan(t_ini - t0, t_fin - t0, alpha=0.2, color='r')
     plt.grid()
-    plt.xlabel('Time [s]')
-    plt.ylabel('Velocity') 
+    plt.xlabel('Tiempo [s]')
+    plt.ylabel('Velocidad') 
     plt.legend()
-    plt.title('Velocities')
+    plt.title('Velocidades')
     plt.savefig(os.path.join(args.out_dir, 'velocidades.png'), dpi=180)
     plt.close()
 
-    # 3) Distance to goal
+    # 3) Distancia a la meta
     t_rel_pose = np.array(t_pose) - t0
     gx, gy = goal
     dists = np.linalg.norm(traj_xy - np.array([gx, gy]), axis=1)
     plt.figure()
-    plt.plot(t_rel_pose, dists, 'b-', label='Distance to goal')
+    plt.plot(t_rel_pose, dists, 'b-', label='Distancia a la meta')
     plt.axhline(y=args.goal_tolerance, color='g', linestyle='--', alpha=0.5, 
-                label=f'Tolerance {args.goal_tolerance}m')
+                label=f'Tolerancia {args.goal_tolerance}m')
     # Highlight blockages
     for t_ini, t_fin in blocks:
         plt.axvspan(t_ini - t0, t_fin - t0, alpha=0.2, color='r')
     plt.grid()
-    plt.xlabel('Time [s]') 
-    plt.ylabel('Distance [m]')
+    plt.xlabel('Tiempo [s]') 
+    plt.ylabel('Distancia [m]')
     plt.legend()
-    plt.title('Distance to Goal')
-    plt.savefig(os.path.join(args.out_dir, 'distancia_goal.png'), dpi=180)
+    plt.title('Distancia a la Meta')
+    plt.savefig(os.path.join(args.out_dir, 'distancia_meta.png'), dpi=180)
     plt.close()
 
     # --- Save results ---

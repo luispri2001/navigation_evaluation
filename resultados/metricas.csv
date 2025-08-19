@@ -1,0 +1,2 @@
+bag,success,mission_time_s,traj_length_m,plan_length_m,extra_distance_pct,rmse_m,num_blockages,blockages_total_s
+nav_eval_bag,True,55.96151065826416,7.727509416220514,7.153353570571479,8.026387064258666,0.13569773417023684,0,0
