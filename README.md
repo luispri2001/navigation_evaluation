@@ -18,12 +18,6 @@ Este proyecto permite evaluar cuantitativamente el desempeño de sistemas de nav
 - Velocidades lineal y angular vs. tiempo (con bloqueos resaltados)
 - Distancia al goal vs. tiempo
 
-## Sistemas probados y versiones ROS 2
-
-| Sistema        | ROS 2 Distro | Ignition Fortress | 
-|---------------|--------------|-------------------|
-| Ubuntu 22.04  | Humble       | ✅                | 
-
 ## Requisitos
 
 - ROS 2 Humble (u otra versión compatible)
